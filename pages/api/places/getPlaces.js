@@ -9,7 +9,7 @@ export default async function handler(req, res) {
 
         const {page, count} = req.query;
 
-        const places = await collection.find({type: "place"}).sort({placeID: 1}).skip((page - 1) * count).limit(count).toArray()
+        const places = await collection.find({type: "place"}).sort({placeID: 1}).skip((parseInt(page) - 1) * parseInt(count)).limit(parseInt(count)).toArray()
 
         res.send({
             data: places,
