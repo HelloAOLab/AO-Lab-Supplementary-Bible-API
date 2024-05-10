@@ -6,7 +6,7 @@ export default async function handler(req, res) {
             await connectToMongoDB();
         }
 
-        const {uid} = req.body;
+        const {uid} = req.query;
 
         const collection = db.collection('biblegraphs');
 
