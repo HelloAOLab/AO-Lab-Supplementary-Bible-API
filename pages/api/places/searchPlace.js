@@ -8,9 +8,17 @@ export default async function handler(req, res) {
         const collection = db.collection('biblegraphs');
 
         const {query} = req.query;
-        
-        const places = await collection.find({displayTitle: new RegExp(query, 'i')}).toArray()
 
+        let places = await collection.find({displayTitle: new RegExp(query, 'i')}).toArray()
+
+        places = places.map((item) => {
+            return {
+                title: item.displayTitle,
+                uid: item.uid,
+                index: item.placeID
+            }
+        })
+        
         res.send({
             data: places,
             status: 200
