@@ -10,7 +10,10 @@ export default async function handler(req, res) {
 
         const {page, count} = req.query;
 
-        let places = await collection.find({type: "place"}).sort({placeID: 1}).skip((parseInt(page) - 1) * parseInt(count)).limit(parseInt(count)).toArray();
+        // let places = await collection.find({type: "place"}).sort({placeID: 1}).skip((parseInt(page) - 1) * parseInt(count)).limit(parseInt(count)).toArray();
+
+        // find me the entry with type equal to place and has more than 0 entries in eventsHere field
+        let places = await collection.find({type: "place", "eventsHere.0": {$exists: true}}).sort({placeID: 1}).skip((parseInt(page) - 1) * parseInt(count)).limit(parseInt(count)).toArray();
 
         places = places.map((item) => {
             return {
