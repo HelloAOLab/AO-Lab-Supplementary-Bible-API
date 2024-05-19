@@ -40,7 +40,7 @@ export default async function handler(req, res) {
         let verse = removeParentDuplicate(verseGraph[0], ["book", "chapter"], uid)
         res.send({
             data: {
-                verse
+                ...verse
             },
             status: 200
         })
