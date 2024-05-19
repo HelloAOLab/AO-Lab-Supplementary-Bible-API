@@ -46,7 +46,7 @@ export default async function handler(req, res) {
             }
         ]).toArray();
 
-        let event = removeParentDuplicate(eventGraph[0], ["participants", "verses"], uid)
+        let event = removeParentDuplicate(eventGraph[0], ["participants", "verses", "locations"], uid)
         res.send({
             data: {
                 ...event
