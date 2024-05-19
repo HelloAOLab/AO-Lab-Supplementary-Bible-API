@@ -11,7 +11,7 @@ export default async function handler(req, res) {
 
         const collection = db.collection('biblegraphs');
 
-        const placeGraph = await collection.aggregate([
+        const eventGraph = await collection.aggregate([
             {
                 $match: {
                     "uid": uid
@@ -21,17 +21,35 @@ export default async function handler(req, res) {
                 $graphLookup: {
                     from: "biblegraphs",
                     startWith: uid,
-                    connectFromField: "eventsHere",
+                    connectFromField: "participants",
                     connectToField: "uid",
-                    as: "eventsHere"
+                    as: "participants"
+                }
+            },
+            {
+                $graphLookup: {
+                    from: "biblegraphs",
+                    startWith: uid,
+                    connectFromField: "verses",
+                    connectToField: "uid",
+                    as: "verses"
+                }
+            },
+            {
+                $graphLookup: {
+                    from: "biblegraphs",
+                    startWith: uid,
+                    connectFromField: "locations",
+                    connectToField: "uid",
+                    as: "locations"
                 }
             }
         ]).toArray();
 
-        let place = removeParentDuplicate(placeGraph[0], ["eventsHere"], uid)
+        let event = removeParentDuplicate(eventGraph[0], ["participants", "verses"], uid)
         res.send({
             data: {
-                ...place
+                ...event
             },
             status: 200
         })
