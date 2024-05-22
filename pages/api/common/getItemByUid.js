@@ -44,6 +44,7 @@ export default async function handler(req, res) {
             status: 200
         })
     }catch(err){
+        console.log(err)
         res.status(500).send({
             data: err,
             status: 500
