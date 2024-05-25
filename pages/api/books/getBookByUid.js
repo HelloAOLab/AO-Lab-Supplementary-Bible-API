@@ -16,10 +16,19 @@ export default async function handler(req, res) {
                 $match: {
                     "uid": uid
                 }
+            },
+            {
+                $graphLookup: {
+                    from: "biblegraphs",
+                    startWith: uid,
+                    connectFromField: "chapters",
+                    connectToField: "uid",
+                    as: "chapters"
+                }
             }
         ]).toArray();
 
-        let book = removeParentDuplicate(bookGraph[0], [], uid)
+        let book = removeParentDuplicate(bookGraph[0], ["chapters"], uid)
         res.send({
             data: {
                 ...book
