@@ -10,7 +10,7 @@ export default async function handler(req, res) {
 
         const {query} = req.query;
 
-        let places = await collection.find({displayTitle: new RegExp(query, 'i')}).toArray()
+        let places = await collection.find({displayTitle: new RegExp(query, 'i'), type: "place"}).toArray()
 
         places = places.map((item) => {
             return {
