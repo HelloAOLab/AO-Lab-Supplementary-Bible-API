@@ -21,6 +21,8 @@ export default async function handler(req, res) {
 
         let FirstResult = await collection.aggregate(firstAggregationValues).toArray();
 
+        console.log(FirstResult)
+
         if(FirstResult.length === 0){
             res.send({
                 data: null,
