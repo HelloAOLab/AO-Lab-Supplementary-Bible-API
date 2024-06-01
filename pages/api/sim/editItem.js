@@ -14,9 +14,12 @@ export default async function handler(req, res) {
         // find a item with a unique uid
         const sim = await collection.findOne({uid: uid});
 
+        let parsedTagsData = JSON.parse(tagsData)
+        console.log(typeof JSON.parse(parsedTagsData))
+
         let newSim = {
             ...sim,
-            sims: [...JSON.parse(tagsData)]
+            sims: JSON.parse(parsedTagsData)
         }
 
         await collection.updateOne({uid: uid}, {$set: newSim});
