@@ -22,7 +22,7 @@ export default async function handler(req, res) {
 
         for(let i = 0; i < dataKeys.length; i++){
             if(data[dataKeys[i]].displayTitle.toLowerCase().includes(query.toLowerCase())){
-                foundPlaces.push(data[dataKeys[i]])
+                foundPlaces.push(minimizeFields(data[key]))
             }
         }
 
