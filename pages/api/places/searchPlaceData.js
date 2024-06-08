@@ -1,4 +1,4 @@
-import { giveData } from "@/lib/utils";
+import { giveData, minimizeFields } from "@/lib/utils";
 export default async function handler(req, res) {
     try{
         res.setHeader('Access-Control-Allow-Origin', 'https://ao.bot');
@@ -22,7 +22,7 @@ export default async function handler(req, res) {
 
         for(let i = 0; i < dataKeys.length; i++){
             if(data[dataKeys[i]].displayTitle.toLowerCase().includes(query.toLowerCase())){
-                foundPlaces.push(minimizeFields(data[key]))
+                foundPlaces.push(minimizeFields(data[dataKeys[i]]))
             }
         }
 
