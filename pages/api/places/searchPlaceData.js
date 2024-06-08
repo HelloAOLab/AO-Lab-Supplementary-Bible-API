@@ -21,7 +21,7 @@ export default async function handler(req, res) {
         let foundPlaces = [];
 
         for(let i = 0; i < dataKeys.length; i++){
-            if(data[dataKeys[i]].displayTitle.toLowerCase().includes(query.toLowerCase()) && data[dataKeys[i]].type === "place" && data[dataKeys[i]].eventsHere[0] !== undefined){
+            if(data[dataKeys[i]].displayTitle.toLowerCase().includes(query.toLowerCase()) && data[dataKeys[i]].type === "place" && data[dataKeys[i]]?.eventsHere?.length > 0){
                 foundPlaces.push(minimizeFields(data[dataKeys[i]]))
             }
         }
