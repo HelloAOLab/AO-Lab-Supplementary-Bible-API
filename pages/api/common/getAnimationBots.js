@@ -3,18 +3,15 @@ import db from "../../../lib/nedb/index.js";
 export default async function handler(req, res) {
     try{
         res.setHeader('Access-Control-Allow-Origin', 'https://ao.bot');
-        if (req.method === 'POST') {
 
-            db.find({_id: req.body.id}, (err, newDox) => {
-                if (err) throw err
-                res.send({
-                    data: newDox,
-                    status: 200
-                })
-            });
-        } else {
-            res.status(405).end(); // Method Not Allowed
-        }
+        const id = req.query.id;
+        db.find({_id: id}, (err, newDox) => {
+            if (err) throw err
+            res.send({
+                data: newDox,
+                status: 200
+            })
+        });
     }catch(err){
         res.status(500).send({
             data: err,
