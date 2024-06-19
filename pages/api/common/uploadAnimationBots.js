@@ -11,7 +11,7 @@ export default async function handler(req, res) {
                 res.send({data: newDoc, status: 200});
             });
         } else {
-            res.status(405).end(); // Method Not Allowed
+            res.status(500).end(); // Method Not Allowed
         }
     }catch(err){
         res.status(500).send({
