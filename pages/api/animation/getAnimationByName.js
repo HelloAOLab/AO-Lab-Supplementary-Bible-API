@@ -8,11 +8,12 @@ export default async function handler(req, res) {
             await connectToMongoDB();
         }
 
-        const {name} = req.query;
+        // changed name to uid for the sake of consistency
+        const {uid} = req.query;
 
         const collection = db.collection('animation');
 
-        if(!name){
+        if(!uid){
             res.send({
                 data: "Invalid Request",
                 status: 400
@@ -20,7 +21,7 @@ export default async function handler(req, res) {
         }
 
         // find a document based on the _id field
-        const animation = await collection.findOne({animationName: name});
+        const animation = await collection.findOne({animationName: uid});
 
         res.send({
             data: animation,
