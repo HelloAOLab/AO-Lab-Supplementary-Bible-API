@@ -26,7 +26,7 @@ export default async function handler(req, res) {
         animations = animations.map((item, index) => {
             return {
                 title: item.animationName,
-                uid: item._id,
+                uid: item.uid,
                 index: index
             }
         });

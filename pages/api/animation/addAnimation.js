@@ -31,7 +31,8 @@ export default async function handler(req, res) {
             const result = await collection.insertOne({
                 animationBotConfigs: JSON.parse(animationBotConfigs),
                 animationName,
-                type: "animation"
+                type: "animation",
+                uid: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15),
             });
 
             res.send({

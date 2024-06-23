@@ -21,7 +21,7 @@ export default async function handler(req, res) {
         }
 
         // find a document based on the _id field
-        const animation = await collection.findOne({animationName: uid});
+        const animation = await collection.findOne({uid});
 
         res.send({
             data: animation,

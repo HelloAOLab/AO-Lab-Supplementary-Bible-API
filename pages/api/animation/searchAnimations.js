@@ -21,8 +21,6 @@ export default async function handler(req, res) {
 
         const animations = await collection.find({animationName: new RegExp(query, 'i')}).toArray();
 
-        console.log(animations)
-
         res.send({
             data: [...animations],
             status: 200
