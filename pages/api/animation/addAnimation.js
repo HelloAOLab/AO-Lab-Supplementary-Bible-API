@@ -1,0 +1,49 @@
+import { connectToMongoDB, db } from "../../../lib/mongodb/mongodb";
+
+export default async function handler(req, res) {
+    try{
+        res.setHeader('Access-Control-Allow-Origin', 'https://ao.bot');
+        
+
+        const {animationBotConfigs, animationName} = req.query;
+
+        if(!db){
+            await connectToMongoDB();
+        }
+
+        const collection = db.collection('animation');
+
+        if(!animationBotConfigs || !animationName){
+            res.send({
+                data: "Invalid Request",
+                status: 400
+            })
+        }
+
+        const result = await collection.find({animationName}).toArray();
+
+        if(result.length > 0){
+            res.send({
+                data: "Animation already exists",
+                status: 400
+            })
+        }else{
+            const result = await collection.insertOne({
+                animationBotConfigs: JSON.parse(animationBotConfigs),
+                animationName,
+                type: "animation"
+            });
+
+            res.send({
+                data: result,
+                status: 200
+            })
+        }
+    }catch(err){
+        console.log(err)
+        res.status(500).send({
+            data: err,
+            status: 500
+        })
+    }
+}
