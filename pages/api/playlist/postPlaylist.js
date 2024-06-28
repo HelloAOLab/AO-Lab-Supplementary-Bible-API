@@ -3,7 +3,7 @@ import { connectToMongoDB, db } from "../../../lib/mongodb/mongodb";
 export default async function handler(req, res) {
     if (req.method === 'POST') {
         try{
-            res.setHeader('Access-Control-Allow-Origin', '*');
+            res.setHeader('Access-Control-Allow-Origin', 'https://ao.bot/');
             res.setHeader("Access-Control-Allow-Methods", "POST,OPTIONS");
             res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
