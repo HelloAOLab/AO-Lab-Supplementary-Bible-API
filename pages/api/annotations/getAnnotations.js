@@ -21,10 +21,10 @@ export default async function handler(req, res) {
         }
 
         // find a document based on the _id field
-        const playlist = await collection.find({title});
+        const annotations = await collection.find({title}).toArray();
 
         res.send({
-            data: playlist,
+            data: annotations,
             status: 200
         })
     }catch(err){
