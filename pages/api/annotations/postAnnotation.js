@@ -6,7 +6,7 @@ export default async function handler(req, res) {
         res.setHeader("Access-Control-Allow-Methods", "POST,OPTIONS");
         res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
-        const {title, annotations} = req.body;
+        const {title, annotations, bots} = req.body;
 
         if(!db){
             await connectToMongoDB();
@@ -17,6 +17,7 @@ export default async function handler(req, res) {
         await collection.insertOne({
             title,
             annotations,
+            bots,
             type: "annotation",
             uid,
             createdAt: new Date()
