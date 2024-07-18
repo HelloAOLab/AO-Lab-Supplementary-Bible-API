@@ -6,7 +6,7 @@ export default async function handler(req, res) {
         res.setHeader("Access-Control-Allow-Methods", "POST,OPTIONS");
         res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
-        const {title, annotations, bots} = req.body;
+        const {recordAddress, recordName} = req.body;
 
         if(!db){
             await connectToMongoDB();
@@ -15,9 +15,8 @@ export default async function handler(req, res) {
         const collection = db.collection('annotation');
         const uid = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
         await collection.insertOne({
-            title,
-            annotations,
-            bots,
+            recordAddress,
+            recordName,
             type: "annotation",
             uid,
             createdAt: new Date()
