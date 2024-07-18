@@ -12,6 +12,13 @@ export default async function handler(req, res) {
             await connectToMongoDB();
         }
 
+        if(!recordAddress || !recordName || !title){
+            res.send({
+                data: "Invalid Request",
+                status: 400
+            })
+        }
+
         const collection = db.collection('annotation');
         const uid = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
         await collection.insertOne({
