@@ -8,20 +8,9 @@ export default async function handler(req, res) {
             await connectToMongoDB();
         }
 
-        // changed name to title for the sake of consistency
-        const {title} = req.query;
-
         const collection = db.collection('annotation');
 
-        if(!title){
-            res.send({
-                data: "Invalid Request",
-                status: 400
-            })
-        }
-
-        // find a document based on the _id field
-        const annotations = await collection.find({title}).toArray();
+        const annotations = await collection.find({title}).sort({title: 1}).toArray();
 
         res.send({
             data: annotations,
