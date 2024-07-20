@@ -26,9 +26,11 @@ export default async function handler(req, res) {
 
         // find documents and sort them according to title field and title should not be null
         const annotations = await collection.find({title: {$ne: null}}).sort({title: 1}).skip((parseInt(page) - 1) * parseInt(count)).limit(parseInt(count)).toArray();
+        const nextAnnotations = await collection.find({title: {$ne: null}}).sort({title: 1}).skip((parseInt(page)) * parseInt(count)).limit(parseInt(count)).toArray();
 
         res.send({
             data: annotations,
+            nextCount: nextAnnotations.length,
             status: 200
         })
     }catch(err){
