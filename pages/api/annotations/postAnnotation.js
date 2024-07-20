@@ -12,11 +12,12 @@ export default async function handler(req, res) {
             await connectToMongoDB();
         }
 
-        if(!recordAddress || !recordName || !title){
+        if(!recordAddress || !recordName || !title || title === ""){
             res.send({
                 data: "Invalid Request",
                 status: 400
             })
+            return
         }
 
         const collection = db.collection('annotation');
