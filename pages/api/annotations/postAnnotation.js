@@ -28,7 +28,7 @@ export default async function handler(req, res) {
             title,
             type: "annotation",
             uid,
-            createdAt: new Date()
+            createdAt: Date.now()
         });
 
         res.send({
