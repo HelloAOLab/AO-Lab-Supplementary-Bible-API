@@ -23,7 +23,7 @@ export default async function handler(req, res) {
         const collection = db.collection('annotation');
         const uid = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
         let currentTime = new Date;
-        let currentUTCTime = currentTime.toUTCString;
+        let currentUTCTime = currentTime.toUTCString();
         await collection.insertOne({
             recordAddress,
             recordName,
