@@ -26,11 +26,11 @@ export default async function handler(req, res) {
 
         // find documents and sort them according to title field and title should not be null
         if(date){
-            const today = new Date(new Date(date).setDate(new Date(date).getDate() + 1)).toUTCString();
-            const tomorrow = new Date(new Date(date).setDate(new Date(date).getDate() + 2)).toUTCString();
-            console.log(tomorrow)
-            const annotations = await collection.find({createdAt: {$gte: new today, $lte: tomorrow}}).sort({createdAt: -1}).skip((parseInt(page) - 1) * parseInt(count)).limit(parseInt(count)).toArray();
-            const nextAnnotations = await collection.find({createdAt: {$gte: new today, $lte: tomorrow}}).sort({createdAt: -1}).skip((parseInt(page)) * parseInt(count)).limit(parseInt(count)).toArray();
+            const today = new Date(new Date(date).setDate(new Date(date).getDate())).toUTCString();
+            const tomorrow = new Date(new Date(date).setDate(new Date(date).getDate() + 1)).toUTCString();
+            console.log(tomorrow, today)
+            const annotations = await collection.find({createdAt: {$gte: today, $lte: tomorrow}}).sort({createdAt: -1}).skip((parseInt(page) - 1) * parseInt(count)).limit(parseInt(count)).toArray();
+            const nextAnnotations = await collection.find({createdAt: {$gte: today, $lte: tomorrow}}).sort({createdAt: -1}).skip((parseInt(page)) * parseInt(count)).limit(parseInt(count)).toArray();
             res.send({
                 data: annotations,
                 nextCount: nextAnnotations.length,
