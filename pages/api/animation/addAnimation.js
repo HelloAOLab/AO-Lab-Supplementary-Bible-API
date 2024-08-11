@@ -2,11 +2,7 @@ import { connectToMongoDB, db } from "../../../lib/mongodb/mongodb";
 
 export default async function handler(req, res) {
     try{
-        res.setHeader('Access-Control-Allow-Origin', 'https://ao.bot');
-        res.setHeader("Access-Control-Allow-Methods", "POST,OPTIONS");
-        res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-
-        const {recordAddress, recordName, animationName} = req.body;
+        const {recordAddress, recordName, animationName} = req.query;
 
         if(!db){
             await connectToMongoDB();
