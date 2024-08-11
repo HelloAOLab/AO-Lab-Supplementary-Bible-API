@@ -6,7 +6,7 @@ export default async function handler(req, res) {
         res.setHeader("Access-Control-Allow-Methods", "POST,OPTIONS");
         res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
-        const {animationBotConfigs, animationName} = req.body;
+        const {recordAddress, recordName, animationName} = req.body;
 
         if(!db){
             await connectToMongoDB();
@@ -14,7 +14,7 @@ export default async function handler(req, res) {
 
         const collection = db.collection('animation');
 
-        if(!animationBotConfigs || !animationName){
+        if(!recordAddress || !recordName || !animationName){
             res.send({
                 data: "Invalid Request",
                 status: 400
@@ -30,7 +30,8 @@ export default async function handler(req, res) {
             })
         }else{
             const result = await collection.insertOne({
-                animationBotConfigs: JSON.parse(animationBotConfigs),
+                recordAddress,
+                recordName,
                 animationName,
                 type: "animation",
                 uid: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15),
