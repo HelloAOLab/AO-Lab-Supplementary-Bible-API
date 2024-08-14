@@ -12,7 +12,7 @@ export default async function handler(req, res) {
 
         const collection = db.collection('animation');
 
-        if(!recordAddress || !recordName || !animationName){
+        if(!recordAddress || !recordName || !animationName || animationName === ""){
             res.send({
                 data: "Invalid Request",
                 status: 400
