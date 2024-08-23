@@ -37,7 +37,8 @@ export default async function handler(req, res) {
 
         res.send({
             data: {
-                uid
+                uid,
+                title
             },
             status: 200
         })
