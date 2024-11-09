@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@injectit/threejs-nodejs-exporters": "^0.0.2",
     "dotenv": "^16.4.5",
     "florasynth": "^1.0.0",
     "fluent-ffmpeg": "^2.1.3",
