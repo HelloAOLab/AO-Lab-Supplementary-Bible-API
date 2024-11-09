@@ -1,2 +1,5 @@
 [build]
     command = "npm config set //r.privjs.com/:_authToken c888f78f-7508-4aca-bd0a-829e0b7eeab4"
+[[plugins]]
+  package = "@netlify/plugin-cache-nextjs"
+  package = "@netlify/plugin-nextjs"
