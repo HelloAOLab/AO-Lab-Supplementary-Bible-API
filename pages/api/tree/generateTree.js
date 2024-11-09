@@ -1,8 +1,6 @@
 import * as FLORASYNTH from "florasynth";
 import * as THREE from "three";
 
-const { GLTFExporter } = require("node-three-gltf");
-
 const NodeThreeExporter = require('@injectit/threejs-nodejs-exporters')
 
 export default async function handler(req, res) {
