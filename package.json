@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@gltf-transform/core": "^4.1.0",
+    "@netlify/plugin-nextjs": "^5.8.1",
     "dotenv": "^16.4.5",
     "FileReader": "^0.10.2",
     "florasynth": "^1.0.0",

@@ -1,2 +1,5 @@
 [build]
     command = `npm config set //r.privjs.com/:_authToken ${process.env.TREE_KEY}`
+
+[build.environment]
+  NODE_VERSION = "16"
