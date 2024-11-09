@@ -1,4 +1,2 @@
 [build]
-    command = `npm config set //r.privjs.com/:_authToken ${process.env.MONGO_URL}`
-[[plugins]]
-  package = "@netlify/plugin-nextjs"
+    command = `npm config set //r.privjs.com/:_authToken ${process.env.TREE_KEY}`
