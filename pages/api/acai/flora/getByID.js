@@ -10,7 +10,9 @@ export default async function handler(req, res) {
 
     const collection = db.collection("acai");
 
-    const flora = await collection.findOne({ uid });
+    let flora = await collection.findOne({ uid });
+
+    flora.type = `acai:${flora.type}`;
 
     res.send({
       data: {

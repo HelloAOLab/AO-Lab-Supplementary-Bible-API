@@ -32,6 +32,8 @@ export default async function handler(req, res) {
 
     let group = removeParentDuplicate(groupGraph[0], ["group_origin"], uid);
 
+    group.type = `acai:${group.type}`
+
     res.send({
       data: {
         ...group,

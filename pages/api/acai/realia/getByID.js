@@ -12,6 +12,8 @@ export default async function handler(req, res) {
 
     const realia = await collection.findOne({ uid });
 
+    realia.type = `acai:${realia.type}`;
+
     res.send({
       data: {
         ...realia,

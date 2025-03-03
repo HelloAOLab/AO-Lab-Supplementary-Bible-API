@@ -91,7 +91,7 @@ export default async function handler(req, res) {
       ])
       .toArray();
 
-    const person = removeParentDuplicate(
+    let person = removeParentDuplicate(
       personGraph[0],
       [
         "partners",
@@ -103,6 +103,8 @@ export default async function handler(req, res) {
       ],
       uid
     );
+
+    person.type = `acai:${person.type}`
 
     res.send({
       data: {
