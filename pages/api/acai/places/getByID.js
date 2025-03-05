@@ -10,7 +10,7 @@ export default async function handler(req, res) {
 
     const collection = db.collection("acai");
 
-    let place = await collection.findOne({  });
+    let place = await collection.findOne({ uid });
 
     place.type = `acai:${place.type}`;
 
