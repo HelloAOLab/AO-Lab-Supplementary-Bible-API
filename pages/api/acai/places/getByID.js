@@ -3,14 +3,79 @@ export default async function handler(req, res) {
   try {
     res.setHeader("Access-Control-Allow-Origin", "https://ao.bot");
     if (!db) {
-        await connectToMongoDB();
+      await connectToMongoDB();
     }
 
-    const {  uid} = req.query;
+    const { uid } = req.query;
 
     const collection = db.collection("acai");
 
-    let place = await collection.findOne({ uid });
+    const placeGraph = await collection
+      .aggregate([
+        {
+          $match: {
+            uid: uid,
+          },
+        },
+        {
+          $graphLookup: {
+            from: "acai",
+            startWith: uid,
+            connectFromField: "possibly_same_as",
+            connectToField: "uid",
+            as: "possibly_same_as",
+          },
+        },
+        {
+          $graphLookup: {
+            from: "acai",
+            startWith: uid,
+            connectFromField: "referred_to_as",
+            connectToField: "uid",
+            as: "referred_to_as",
+          },
+        },
+        {
+          $graphLookup: {
+            from: "acai",
+            startWith: uid,
+            connectFromField: "associated_places",
+            connectToField: "uid",
+            as: "associated_places",
+          },
+        },
+        {
+          $graphLookup: {
+            from: "acai",
+            startWith: uid,
+            connectFromField: "nearby_places",
+            connectToField: "uid",
+            as: "nearby_places",
+          },
+        },
+        {
+          $graphLookup: {
+            from: "acai",
+            startWith: uid,
+            connectFromField: "subregion_of",
+            connectToField: "uid",
+            as: "subregion_of",
+          },
+        },
+      ])
+      .toArray();
+
+    let place = removeParentDuplicate(
+      placeGraph[0],
+      [
+        "possibly_same_as",
+        "referred_to_as",
+        "associated_places",
+        "nearby_places",
+        "subregion_of"
+      ],
+      uid
+    );
 
     place.type = `acai:${place.type}`;
 
