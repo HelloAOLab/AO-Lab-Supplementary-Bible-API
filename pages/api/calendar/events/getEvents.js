@@ -18,10 +18,7 @@ export default async function handler(req, res) {
             }
         })
 
-        res.send({
-            data: events,
-            status: 200
-        })
+        res.send([...events])
     }catch(err){
         res.status(500).send({
             data: err,
