@@ -1,8 +1,22 @@
 export default async function handler(req, res) {
     try{
         res.setHeader('Access-Control-Allow-Origin', '*');
-        res.setHeader("Access-Control-Allow-Methods", "POST,OPTIONS");
-        res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+
+        const {tools} = req.query;
+        if(!tools){
+            res.status(400).send({
+                data: "Invalid Request",
+                status: 400
+            })
+        }
+
+        const toolsArray = JSON.parse(tools);
+        if(!Array.isArray(toolsArray)){
+            res.status(400).send({
+                data: "Invalid Request",
+                status: 400
+            })
+        }
 
         const sessionConfig = JSON.stringify({
             session: {
@@ -13,7 +27,7 @@ export default async function handler(req, res) {
                         voice: "marin",
                     },
                 },
-                tools: [...req.body.tools],
+                tools: [...toolsArray],
             },
             expires_after: {
                 anchor: "created_at",
