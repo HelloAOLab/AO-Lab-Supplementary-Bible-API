@@ -1,3 +1,5 @@
+import { model } from "mongoose";
+
 export default async function handler(req, res) {
     try{
         res.setHeader('Access-Control-Allow-Origin', '*');
@@ -26,8 +28,17 @@ export default async function handler(req, res) {
                     output: {
                         voice: "marin",
                     },
+                    input: {
+                        transcription: {
+                            model: "whisper-1",
+                            language: "en",
+                        }
+                    }
                 },
                 tools: [...toolsArray],
+                include: [
+                    "item.input_audio_transcription.logprobs"
+                ]
             },
             expires_after: {
                 anchor: "created_at",
