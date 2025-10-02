@@ -30,7 +30,7 @@ export default async function handler(req, res) {
                     },
                     input: {
                         transcription: {
-                            model: "whisper-1",
+                            model: "gpt-4o-transcribe",
                             language: "en",
                         }
                     }
