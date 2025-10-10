@@ -42,7 +42,7 @@ export default async function handler(req, res) {
             },
             expires_after: {
                 anchor: "created_at",
-                seconds: 600
+                seconds: 3600
             },
         });
 
